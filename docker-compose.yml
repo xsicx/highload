@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  api:
+    container_name: ${SERVICE_NAME}-api
+    build:
+      context: .
+      target: api_prod
+      args:
+        - GITLAB_TOKEN
+    env_file:
+      - .env
+    restart: unless-stopped
+    depends_on:
+      - db
+    networks:
+      - default
+
+  db:
+    container_name: ${SERVICE_NAME}-db
+    restart: always
+    image: postgres:15.2
+    ports:
+      - ${POSTGRES_OPEN_PORT-54322}:5432
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB

@@ -1,0 +1,138 @@
+run:
+  tests: false
+
+issues:
+  exclude-rules:
+    - linters:
+        - lll
+      source: "^# "
+
+linters-settings:
+  gosec:
+    excludes:
+      - G401
+      - G501
+  revive:
+    rules:
+      - name: var-naming
+        disabled: true
+  stylecheck:
+    initialisms: [ "ACL", "API", "ASCII", "CPU", "CSS", "DNS", "EOF", "GUID", "HTML", "HTTP", "HTTPS", "ID", "IP", "JSON", "QPS", "RAM", "RPC", "SLA", "SMTP", "SQL", "SSH", "TCP", "TLS", "TTL", "UDP", "UI", "GID", "UID", "UUID", "URI", "URL", "URN", "UTM", "UTF8", "VM", "XML", "XMPP", "XSRF", "XSS", "SIP", "RTP", "AMQP", "DB", "TS" ]
+
+  tagliatelle:
+    case:
+      use-field-name: true
+      rules:
+        # Any struct tag type can be used.
+        # Support string case: `camel`, `pascal`, `kebab`, `snake`, `goCamel`, `goPascal`, `goKebab`, `goSnake`, `upper`, `lower`
+        json: snake
+        yaml: snake
+        xml: snake
+        bson: snake
+        avro: snake
+        mapstructure: snake
+
+  errcheck:
+    # Report about not checking of errors in type assertions: `a := b.(MyStruct)`.
+    # Such cases aren't reported by default.
+    # Default: false
+    check-type-assertions: true
+    # report about assignment of errors to blank identifier: `num, _ := strconv.Atoi(numStr)`.
+    # Such cases aren't reported by default.
+    # Default: false
+    check-blank: true
+
+linters:
+  disable-all: true
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - containedctx
+    - contextcheck
+    - cyclop
+    - decorder
+    - depguard
+    - dogsled
+    - dupl
+    - dupword
+    - durationcheck
+    - errcheck
+    - errchkjson
+    - errname
+    - errorlint                 # we have global error wrapper
+    - execinquery
+    - exhaustive
+    #    - exhaustruct              # should describe default properties in struct in any calls
+    - exportloopref
+    - forbidigo
+    - forcetypeassert           # check force type assertion
+    - funlen
+    - gci
+    - gochecknoglobals
+    - gochecknoinits
+    - gocognit
+    - goconst
+    - gocritic
+    - gocyclo
+    #    - godot                    # check exists dot in comment:
+    #    - godox                    # is disabled because of blocking TODO,FIXME,BUG comments
+    - goerr113
+    - gofmt
+    - gofumpt
+    - goheader
+    - goimports
+    - gomnd
+    - gomoddirectives
+    - gomodguard
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - grouper
+    - importas
+    - ineffassign
+    - interfacebloat         # SHOULD DISCUSS
+    - ireturn                # SHOULD DISCUSS
+    - lll
+    - loggercheck
+    - logrlint
+    - maintidx
+    - makezero
+    - misspell
+    - nakedret
+    - nestif
+    - nilerr                 # SHOULD DISCUSS
+    #    - nilnil                 # Author thinks that `return nil, nil` - it's Not implemented method, author mistakes
+    - nlreturn
+    - noctx                  # SHOULD DISCUSS
+    - nolintlint
+    - nonamedreturns
+    - nosprintfhostport
+    - paralleltest
+    - prealloc
+    - predeclared
+    - promlinter
+    - reassign
+    - revive                # is disabled because of blank imports
+    #    - rowserrcheck          # is disabled because of generics
+    #    - sqlclosecheck         # is disabled because of generics
+    - staticcheck
+    - stylecheck
+    - tagliatelle           # is disabled because of json annotations
+    - tenv
+    - testableexamples
+    - testpackage          # SHOULD DISCUSS
+    - thelper
+    - tparallel
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - usestdlibvars
+    #    - varnamelen           # is disabled because of short names
+    #    - wastedassign         # is disabled because of generics
+    - whitespace
+    #    - wrapcheck            # we have global error wrapper
+    - wsl                  # is disabled because of creating empty lines

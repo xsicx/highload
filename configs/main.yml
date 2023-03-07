@@ -1,0 +1,22 @@
+db:
+  dsn: user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local
+  connection_max_lifetime: 180
+  max_open_connections: 10
+  max_idle_connections: 10
+
+app:
+  env: dev
+  host: lerna.group
+  courses_api_host: http://some-api-host:8080
+
+log:
+  level: debug
+
+events:
+  amqp:
+    uri: amqp://user:pass@127.0.0.1:5672/vhost
+    queue: orders.events
+    errors_queue: orders.events.errors
+
+amqp:
+  uri: amqp://user:pass@127.0.0.1:5672/vhost

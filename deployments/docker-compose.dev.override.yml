@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      target: dev
+    restart: "unless-stopped"
+    env_file:
+      - .env
+      - .env.local
+    volumes:
+      - ./:/go/src/orders
+
+  events:
+    build:
+      target: dev
+    restart: "unless-stopped"
+    env_file:
+      - .env
+      - .env.local
+    volumes:
+      - ./:/go/src/orders

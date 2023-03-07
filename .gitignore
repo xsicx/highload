@@ -1,0 +1,12 @@
+.idea
+.data
+.bin
+.DS_Store
+.env.local
+
+cover.out
+
+docker-compose.override.yml
+
+# Visual Studio Settings
+.vscode
