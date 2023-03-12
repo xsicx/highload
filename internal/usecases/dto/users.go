@@ -1,15 +1,29 @@
 package dto
 
-type LoginUserDTO struct {
-	ID       string
-	Password string
+type LoginUserRequest struct {
+	ID       string `json:"id"`
+	Password string `json:"password"`
 }
 
-type RegisterUserDTO struct {
-	FirstName  string
-	SecondName string
-	Birthdate  string
-	Biography  string
-	City       string
-	Password   string
+type RegisterUserRequest struct {
+	FirstName  string `json:"first_name"`
+	SecondName string `json:"second_name"`
+	Birthdate  string `json:"birthdate"`
+	Biography  string `json:"biography"`
+	City       string `json:"city"`
+	Password   string `json:"password"`
+}
+
+type UserResponse struct {
+	ID         string `json:"id"`
+	FirstName  string `json:"first_name"`
+	SecondName string `json:"second_name"`
+	Age        int    `json:"age"`
+	Birthdate  string `json:"birthdate"`
+	Biography  string `json:"biography"`
+	City       string `json:"city"`
+}
+
+type UserTokenResponse struct {
+	Token string `json:"token"`
 }

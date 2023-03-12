@@ -6,6 +6,7 @@ import (
 	"encoding/hex"
 	"time"
 
+	"github.com/pkg/errors"
 	uuid "github.com/satori/go.uuid"
 	"github.com/xsicx/highload/internal/domain"
 	"github.com/xsicx/highload/internal/usecases/dto"
@@ -20,17 +21,17 @@ func NewUsersManager(gateway Gateway) *Manager {
 	return &Manager{usersGateway: gateway}
 }
 
-func (m *Manager) Login(ctx context.Context, dto dto.LoginUserDTO) string {
+func (m *Manager) Login(ctx context.Context, dto dto.LoginUserRequest) (string, error) {
 	// TODO: should implement later, for current task - return stub
 	b := make([]byte, 12)
 	if _, err := rand.Read(b); err != nil {
-		return ""
+		return "", errors.Wrap(err, "generating token error")
 	}
 
-	return hex.EncodeToString(b)
+	return hex.EncodeToString(b), nil
 }
 
-func (m *Manager) Register(ctx context.Context, dto dto.RegisterUserDTO) (*domain.User, error) {
+func (m *Manager) Register(ctx context.Context, dto dto.RegisterUserRequest) (*domain.User, error) {
 	birthdate, err := time.Parse("2006-01-02", dto.Birthdate)
 	if err != nil {
 		return nil, err

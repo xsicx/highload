@@ -6,6 +6,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.42.0
 	github.com/jackc/pgx v3.6.2+incompatible
 	github.com/jmoiron/sqlx v1.3.5
+	github.com/pkg/errors v0.9.1
 	github.com/satori/go.uuid v1.2.0
 	github.com/spf13/viper v1.15.0
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e
@@ -27,7 +28,6 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
 	github.com/philhofer/fwd v1.1.1 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/savsgio/dictpool v0.0.0-20221023140959-7bf2e61cea94 // indirect
 	github.com/savsgio/gotils v0.0.0-20220530130905-52f3993e8d6d // indirect

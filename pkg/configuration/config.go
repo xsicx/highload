@@ -15,14 +15,14 @@ const (
 )
 
 func New(cfg interface{}) interface{} {
-	if err := parseEnv(); err != nil {
-		panic(err)
-	}
+	parseEnv()
+
 	if err := parseConfigFile(configsDir, configName); err != nil {
 		panic(err)
 	}
 
 	env := viper.GetString("app.env")
+
 	configOverride := viper.GetString("app.config.override")
 	if err := parseConfigOverride(configsDir+"/"+env, configOverride); err != nil {
 		panic(err)
@@ -44,9 +44,7 @@ type Config struct {
 func NewChain(cfg interface{}, configs ...Config) interface{} {
 	var err error
 
-	if err = parseEnv(); err != nil {
-		panic(err)
-	}
+	parseEnv()
 
 	for _, config := range configs {
 		cfg, err = LoadData(cfg, config)
@@ -82,12 +80,10 @@ func LoadData(cfg interface{}, config Config) (interface{}, error) {
 	return cfg, nil
 }
 
-func parseEnv() error {
+func parseEnv() {
 	viper.AutomaticEnv()
 
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
-
-	return nil
 }
 
 func parseConfigFile(folder, configName string) error {
