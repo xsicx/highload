@@ -13,10 +13,10 @@ import (
 )
 
 type Manager struct {
-	usersGateway domain.UsersGateway
+	usersGateway Gateway
 }
 
-func NewUsersManager(gateway domain.UsersGateway) *Manager {
+func NewUsersManager(gateway Gateway) *Manager {
 	return &Manager{usersGateway: gateway}
 }
 

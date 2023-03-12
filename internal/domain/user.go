@@ -1,7 +1,6 @@
 package domain
 
 import (
-	"context"
 	"time"
 
 	uuid "github.com/satori/go.uuid"
@@ -16,9 +15,4 @@ type User struct {
 	Biography  string    `json:"biography"`
 	City       string    `json:"city"`
 	Password   string    `json:"password"`
-}
-
-type UsersGateway interface {
-	GetUserByID(ctx context.Context, id uuid.UUID) (*User, error)
-	CreateUser(ctx context.Context, user User) error
 }

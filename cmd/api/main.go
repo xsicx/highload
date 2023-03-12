@@ -7,6 +7,7 @@ import (
 	"syscall"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/xsicx/highload/internal/interfaces/api"
 	"github.com/xsicx/highload/internal/interfaces/config"
 	"github.com/xsicx/highload/internal/interfaces/database"
 )
@@ -37,6 +38,10 @@ func main() {
 
 		serverShutdown <- struct{}{}
 	}()
+
+	api.New(apiServer, api.Dependencies{
+		UsersGateway: database.NewUsersGateway(database.DB()),
+	})
 
 	must(apiServer.Listen(":9000"))
 
