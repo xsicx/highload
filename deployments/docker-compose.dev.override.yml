@@ -9,14 +9,4 @@ services:
       - .env
       - .env.local
     volumes:
-      - ./:/go/src/orders
-
-  events:
-    build:
-      target: dev
-    restart: "unless-stopped"
-    env_file:
-      - .env
-      - .env.local
-    volumes:
-      - ./:/go/src/orders
+      - ./:/go/src/social

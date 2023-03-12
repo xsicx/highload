@@ -11,6 +11,8 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    ports:
+      - "9000:9000"
     depends_on:
       - db
     networks:
@@ -20,6 +22,8 @@ services:
     container_name: ${SERVICE_NAME}-db
     restart: always
     image: postgres:15.2
+    volumes:
+      - ./build/package/sql/tables.sql:/docker-entrypoint-initdb.d/tables.sql
     ports:
       - ${POSTGRES_OPEN_PORT-54322}:5432
     environment:

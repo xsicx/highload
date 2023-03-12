@@ -27,3 +27,7 @@ type UserResponse struct {
 type UserTokenResponse struct {
 	Token string `json:"token"`
 }
+
+type UserIDResponse struct {
+	UserID string `json:"user_id"`
+}

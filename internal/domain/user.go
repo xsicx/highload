@@ -7,12 +7,12 @@ import (
 )
 
 type User struct {
-	ID uuid.UUID
+	ID uuid.UUID `db:"id" json:"id"`
 
-	FirstName  string    `json:"first_name"`
-	SecondName string    `json:"second_name"`
-	Birthdate  time.Time `json:"birthdate"`
-	Biography  string    `json:"biography"`
-	City       string    `json:"city"`
-	Password   string    `json:"password"`
+	FirstName  string    `db:"first_name" json:"first_name"`
+	SecondName string    `db:"second_name" json:"second_name"`
+	Birthdate  time.Time `db:"birthdate" json:"birthdate"`
+	Biography  string    `db:"biography" json:"biography"`
+	City       string    `db:"city" json:"city"`
+	Password   string    `db:"password" json:"password"`
 }

@@ -23,7 +23,7 @@ func NewUsersController(usersGateway users.Gateway) *UsersController {
 
 func (c *UsersController) login(ctx *fiber.Ctx) error {
 	request := dto.LoginUserRequest{}
-	if err := ctx.BodyParser(request); err != nil {
+	if err := ctx.BodyParser(&request); err != nil {
 		return errors.Wrap(err, "body parser error")
 	}
 
@@ -44,21 +44,23 @@ func (c *UsersController) login(ctx *fiber.Ctx) error {
 }
 
 func (c *UsersController) register(ctx *fiber.Ctx) error {
-	userDTO := dto.RegisterUserRequest{}
-	if err := ctx.BodyParser(userDTO); err != nil {
+	request := dto.RegisterUserRequest{}
+	if err := ctx.BodyParser(&request); err != nil {
 		return errors.Wrap(err, "body parser error")
 	}
 
 	manager := users.NewUsersManager(c.UsersGateway)
 
-	user, err := manager.Register(ctx.UserContext(), userDTO)
+	user, err := manager.Register(ctx.UserContext(), request)
 	if err != nil {
 		return err
 	}
 
+	response := dto.UserIDResponse{UserID: user.ID.String()}
+
 	ctx.Status(fiber.StatusCreated)
 
-	return ctx.JSON(user)
+	return ctx.JSON(response)
 }
 
 func (c *UsersController) getByID(ctx *fiber.Ctx) error {
