@@ -22,6 +22,24 @@ func NewUsersManager(gateway Gateway) *Manager {
 }
 
 func (m *Manager) Login(ctx context.Context, dto dto.LoginUserRequest) (string, error) {
+	userID, err := uuid.FromString(dto.ID)
+	if err != nil {
+		return "", errors.Wrap(err, "uuid parser error")
+	}
+
+	user, err := m.usersGateway.GetUserByID(ctx, userID)
+	if err != nil {
+		return "", err
+	}
+
+	if user == nil {
+		return "", errors.New("user not found")
+	}
+
+	if !password.CheckPasswordHash(dto.Password, user.Password) {
+		return "", errors.New("wrong password")
+	}
+
 	// TODO: should implement later, for current task - return stub
 	b := make([]byte, 12)
 	if _, err := rand.Read(b); err != nil {
